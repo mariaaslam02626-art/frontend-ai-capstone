@@ -40,4 +40,23 @@ describe("validateSettings", () => {
       email: "maria@example.com",
     });
   });
+
+  it("rejects names shorter than 2 characters", () => {
+    const result = validateSettings({
+      name: "A",
+      email: "test@example.com",
+    });
+
+    assert.equal(result.isValid, false);
+    assert.equal(result.errors.name, "Name must be at least 2 characters.");
+  });
+  it("rejects emails without a dot in the domain", () => {
+    const result = validateSettings({
+      name: "Maria",
+      email: "maria@examplecom",
+    });
+
+    assert.equal(result.isValid, false);
+    assert.equal(result.errors.email, "Enter a valid email address.");
+  });
 });

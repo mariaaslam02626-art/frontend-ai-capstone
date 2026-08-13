@@ -13,7 +13,9 @@ export function validateSettings({ name, email }) {
   if (!trimmedName) {
     errors.name = "Name is required.";
   }
-
+  else if (trimmedName.length < 2) {
+    errors.name = "Name must be at least 2 characters.";
+}
   if (!trimmedEmail) {
     errors.email = "Email is required.";
   } else if (!EMAIL_PATTERN.test(trimmedEmail)) {
